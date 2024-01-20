@@ -1,4 +1,4 @@
-﻿namespace online_recharged_mobile.Services
+﻿namespace online_recharged_mobile.Services.ResponseMessageService
 {
     public class ResponseMessage : IResponseMessage
     {

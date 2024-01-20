@@ -24,9 +24,11 @@ namespace online_recharged_mobile.Models
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
 
-    
+   
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasPostgresExtension("pgcrypto");
+
             modelBuilder.Entity<Feedback>(entity =>
             {
                 entity.ToTable("Feedback");
@@ -216,8 +218,12 @@ namespace online_recharged_mobile.Models
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("modify_at");
 
+                entity.Property(e => e.Otp)
+                    .HasMaxLength(6)
+                    .HasColumnName("otp");
+
                 entity.Property(e => e.Password)
-                    .HasMaxLength(50)
+                    .HasMaxLength(128)
                     .HasColumnName("password");
 
                 entity.Property(e => e.Phone)
@@ -227,6 +233,10 @@ namespace online_recharged_mobile.Models
                 entity.Property(e => e.Username)
                     .HasMaxLength(50)
                     .HasColumnName("username");
+
+                entity.Property(e => e.VerifyAt)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("verify_at");
             });
 
             modelBuilder.Entity<UserRole>(entity =>

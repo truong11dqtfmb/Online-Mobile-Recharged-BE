@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using online_recharged_mobile.DTOs;
 using online_recharged_mobile.Models;
-using online_recharged_mobile.Services;
+using online_recharged_mobile.Services.ResponseMessageService;
 
 namespace online_recharged_mobile.Controllers
 {
