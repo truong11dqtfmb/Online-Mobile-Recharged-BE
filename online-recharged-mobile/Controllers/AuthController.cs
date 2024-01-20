@@ -93,6 +93,12 @@ namespace online_recharged_mobile.Controllers
 
                     await _context.Users.AddAsync(newuser);
                     await _context.SaveChangesAsync();
+                    await _context.UserRoles.AddAsync(new UserRole
+                    {
+                        RoleId = 2,
+                        UserId = newuser.Id,
+                    });
+                    await _context.SaveChangesAsync();
                     string body = string.Format("Your code verify is: {0}", newuser.Otp);
                     _common.sendEmail("Verifry Email", body, newuser.Email);
 
