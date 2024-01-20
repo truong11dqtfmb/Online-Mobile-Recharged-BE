@@ -66,10 +66,8 @@ namespace online_recharged_mobile.Services.CommonService
         {
             using (SHA512 shaM = new SHA512Managed())
             {
-                // ComputeHash - returns byte array  
                 byte[] bytes = shaM.ComputeHash(Encoding.UTF8.GetBytes(value));
 
-                // Convert byte array to a string   
                 StringBuilder builder = new StringBuilder();
                 for (int i = 0; i < bytes.Length; i++)
                 {
