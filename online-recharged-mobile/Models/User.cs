@@ -22,6 +22,10 @@ namespace online_recharged_mobile.Models
         public string Email { get; set; } = null!;
         public string? Otp { get; set; }
         public DateTime? VerifyAt { get; set; }
+        public string? Picture { get; set; }
+        public DateTime? Dob { get; set; }
+        public string? Fullname { get; set; }
+        public string? Address { get; set; }
 
         public virtual ICollection<Feedback> Feedbacks { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }

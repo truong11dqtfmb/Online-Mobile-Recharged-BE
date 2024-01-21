@@ -11,5 +11,6 @@ namespace online_recharged_mobile.DTOs
         public string Phone { get; set; }
         [EmailAddress]
         public string Email { get; set; }
+        public DateTime Dob { get; set; }
     }
 }

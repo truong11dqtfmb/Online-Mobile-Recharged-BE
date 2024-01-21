@@ -32,7 +32,7 @@ namespace online_recharged_mobile.Controllers
                 if (request != null)
                 {
                     var user = await _context.Users
-                        .Where(u => u.Username == request.Username && _common.Hash(request.Password).ToLower() == u.Password && u.IsActive == true)
+                        .Where(u => u.Username == request.Username && _common.Hash(request.Password) == u.Password && u.IsActive == true)
                         .SingleOrDefaultAsync();
                     if (user != null)
                     {
@@ -88,6 +88,7 @@ namespace online_recharged_mobile.Controllers
                         Password = _common.Hash(request.Password),
                         Otp = OTP,
                         Phone = request.Phone,
+                        Dob= request.Dob,
                         IsActive = false
                     };
 
@@ -106,13 +107,13 @@ namespace online_recharged_mobile.Controllers
                 }
                 else
                 {
-                    return BadRequest(_responseMessage.error("Email has already existed"));
+                    return BadRequest(_responseMessage.error("Email or username has already existed"));
                 }
 
             }
             catch (Exception ex)
             {
-                return BadRequest(_responseMessage.error(ex.Message + " Inner Exception: " + ex.InnerException?.Message));
+                return BadRequest(_responseMessage.error(ex.Message));
             }
         }
 
@@ -120,7 +121,7 @@ namespace online_recharged_mobile.Controllers
         public async Task<IActionResult> Verify(VerifyDTO request)
         {
             var unverified_user = await _context.Users
-                .Where(x => x.Otp.ToUpper() == request.Otp.ToUpper())
+                .Where(x => x.Otp == request.Otp.ToUpper())
                 .SingleOrDefaultAsync();
             if (unverified_user != null)
             {
