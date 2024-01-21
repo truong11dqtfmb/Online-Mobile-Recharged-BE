@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\images\\test.jpg"
     },
     {
+      "Id": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\images\\tải xuống.jpg",
+      "PackagePath": "staticwebassets\\images\\tải xuống.jpg"
+    },
+    {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.online-recharged-mobile.props",
       "PackagePath": "build\\online-recharged-mobile.props"
     },

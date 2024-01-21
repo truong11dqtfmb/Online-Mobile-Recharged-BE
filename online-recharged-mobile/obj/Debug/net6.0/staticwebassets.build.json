@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "mr1RuahlkKNc79+yn3mhp16EyWCyJVWqTP7D06UsP7o=",
+  "Hash": "BeCJ3I5ZpQrTOudkL7YUuw4RtLwUAQKYS1zlRZ/SjTs=",
   "Source": "online-recharged-mobile",
   "BasePath": "_content/online-recharged-mobile",
   "Mode": "Default",
@@ -32,6 +32,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\283261396_4854578731315522_7108252699229220062_n.jpg"
+    },
+    {
+      "Identity": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\images\\tải xuống.jpg",
+      "SourceId": "online-recharged-mobile",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\",
+      "BasePath": "_content/online-recharged-mobile",
+      "RelativePath": "images/tải xuống.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\tải xuống.jpg"
     },
     {
       "Identity": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\images\\test.jpg",

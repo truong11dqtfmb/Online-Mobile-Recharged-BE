@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using online_recharged_mobile.DTOs;
 using online_recharged_mobile.Models;
+using online_recharged_mobile.Services.CommonService;
 using online_recharged_mobile.Services.ResponseMessageService;
 using online_recharged_mobile.Services.UserService;
 
@@ -11,11 +12,13 @@ namespace online_recharged_mobile.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "User")]
     public class UserController : ControllerBase
     {
         private readonly rechargedContext _context;
         private readonly IResponseMessage _responseMessage;
         private readonly IUserService _userService;
+        private readonly ICommon _common;
 
         public UserController(rechargedContext context, IResponseMessage responseMessage, IUserService userService)
         {
@@ -25,7 +28,6 @@ namespace online_recharged_mobile.Controllers
         }
 
         [HttpPut("uploadimage")]
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> postImage([FromForm] PostImageDTO request)
         {
             try
@@ -52,7 +54,6 @@ namespace online_recharged_mobile.Controllers
         }
 
         [HttpPut("edituser")]
-        [Authorize(Roles = "User")]
         public async Task<IActionResult> editUser(EdituserDTO request)
         {
             try
@@ -62,8 +63,10 @@ namespace online_recharged_mobile.Controllers
                     .SingleOrDefaultAsync()
                     ?? throw new Exception("data not found");
 
-                user.Phone= request.Phone;
-                user.Email= request.Email;
+                user.Fullname = request.Fullname;
+                user.Address = request.Address;
+                user.Dob = request.Dob;
+                user.ModifyAt = DateTime.Now;
 
                 await _context.SaveChangesAsync();
                 return Ok(_responseMessage.ok("update data successfully", user));
@@ -72,6 +75,21 @@ namespace online_recharged_mobile.Controllers
             {
                 return BadRequest(_responseMessage.error(ex.Message));
             }
+        }
+
+        [HttpPut("changepassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO changepass)
+        {
+            var thisuser = await _context.Users
+                .Where(x => x.Username == _userService.getUserName())
+                .SingleOrDefaultAsync();
+            if (_common.Hash(changepass.CurrentPassword) == thisuser.Password)
+            {
+                thisuser.Password = _common.Hash(changepass.NewPassword);
+                await _context.SaveChangesAsync();
+                return Ok(_responseMessage.ok("Change password sucessfully"));
+            }
+            return BadRequest(_responseMessage.error("Your current password is incorrect"));
         }
     }
 }

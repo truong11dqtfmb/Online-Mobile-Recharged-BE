@@ -121,7 +121,7 @@ namespace online_recharged_mobile.Controllers
         public async Task<IActionResult> Verify(VerifyDTO request)
         {
             var unverified_user = await _context.Users
-                .Where(x => x.Otp == request.Otp.ToUpper())
+                .Where(u => u.Otp == request.Otp.ToUpper())
                 .SingleOrDefaultAsync();
             if (unverified_user != null)
             {
@@ -138,6 +138,25 @@ namespace online_recharged_mobile.Controllers
                 }
             }
             return BadRequest(_responseMessage.error("Invalid code"));
+        }
+
+
+        [HttpPut("resestpassword")]
+        public async Task<IActionResult> ResetPassword(ResetpasswordDTO request)
+        {
+            var user = await _context.Users
+                .Where(u => u.Email == request.Email && u.IsActive == true)
+                .SingleOrDefaultAsync();
+            if (user != null)
+            {
+                string resetpassword = _common.CreateRandomString(10);
+                user.Password = _common.Hash(resetpassword);
+                await _context.SaveChangesAsync();
+                string body = "Your Password is: " + resetpassword;
+                _common.sendEmail("Reset Password", body, request.Email);
+                return Ok(_responseMessage.ok("We've sent new password to your email, please check your email"));
+            }
+            return BadRequest(_responseMessage.error("Your email hasn't been used"));
         }
     }
 }
