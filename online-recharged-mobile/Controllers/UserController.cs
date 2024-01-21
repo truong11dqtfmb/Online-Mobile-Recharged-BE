@@ -20,11 +20,12 @@ namespace online_recharged_mobile.Controllers
         private readonly IUserService _userService;
         private readonly ICommon _common;
 
-        public UserController(rechargedContext context, IResponseMessage responseMessage, IUserService userService)
+        public UserController(rechargedContext context, IResponseMessage responseMessage, IUserService userService, ICommon common)
         {
             _context = context;
             _responseMessage = responseMessage;
             _userService = userService;
+            _common = common;
         }
 
         [HttpPut("uploadimage")]
@@ -80,16 +81,24 @@ namespace online_recharged_mobile.Controllers
         [HttpPut("changepassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordDTO changepass)
         {
-            var thisuser = await _context.Users
-                .Where(x => x.Username == _userService.getUserName())
-                .SingleOrDefaultAsync();
-            if (_common.Hash(changepass.CurrentPassword) == thisuser.Password)
+            try
             {
-                thisuser.Password = _common.Hash(changepass.NewPassword);
-                await _context.SaveChangesAsync();
-                return Ok(_responseMessage.ok("Change password sucessfully"));
+                var thisuser = await _context.Users
+                    .Where(x => x.Username == _userService.getUserName())
+                    .SingleOrDefaultAsync();
+                if (_common.Hash(changepass.CurrentPassword) == thisuser.Password)
+                {
+                    thisuser.Password = _common.Hash(changepass.NewPassword);
+                    await _context.SaveChangesAsync();
+                    return Ok(_responseMessage.ok("Change password sucessfully"));
+                }
+                return BadRequest(_responseMessage.error("Your current password is incorrect"));
+
             }
-            return BadRequest(_responseMessage.error("Your current password is incorrect"));
+            catch (Exception ex)
+            {
+                return BadRequest(_responseMessage.error(ex.Message));
+            }
         }
     }
 }
