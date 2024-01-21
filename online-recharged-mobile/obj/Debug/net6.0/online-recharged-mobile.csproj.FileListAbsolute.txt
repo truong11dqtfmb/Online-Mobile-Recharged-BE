@@ -47,3 +47,4 @@ D:\github\Online-Mobile-Recharged\online-recharged-mobile\obj\Debug\net6.0\refin
 D:\github\Online-Mobile-Recharged\online-recharged-mobile\obj\Debug\net6.0\online-recharged-mobile.pdb
 D:\github\Online-Mobile-Recharged\online-recharged-mobile\obj\Debug\net6.0\online-recharged-mobile.genruntimeconfig.cache
 D:\github\Online-Mobile-Recharged\online-recharged-mobile\obj\Debug\net6.0\ref\online-recharged-mobile.dll
+D:\github\Online-Mobile-Recharged\online-recharged-mobile\bin\Debug\net6.0\online-recharged-mobile.staticwebassets.runtime.json

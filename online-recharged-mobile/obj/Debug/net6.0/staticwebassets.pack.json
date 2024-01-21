@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\images\\283261396_4854578731315522_7108252699229220062_n.jpg",
+      "PackagePath": "staticwebassets\\images\\283261396_4854578731315522_7108252699229220062_n.jpg"
+    },
+    {
+      "Id": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\images\\test.jpg",
+      "PackagePath": "staticwebassets\\images\\test.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.online-recharged-mobile.props",
+      "PackagePath": "build\\online-recharged-mobile.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.online-recharged-mobile.props",
+      "PackagePath": "buildMultiTargeting\\online-recharged-mobile.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.online-recharged-mobile.props",
+      "PackagePath": "buildTransitive\\online-recharged-mobile.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.online-recharged-mobile.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

@@ -24,7 +24,15 @@ namespace online_recharged_mobile.Models
         public virtual DbSet<User> Users { get; set; } = null!;
         public virtual DbSet<UserRole> UserRoles { get; set; } = null!;
 
-   
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseNpgsql("Server=118.70.125.195;Port=5111;Userid=postgres;Password=123456;Pooling=false;MinPoolSize=1;MaxPoolSize=20;Timeout=15;SslMode=Disable;Database=recharged");
+            }
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasPostgresExtension("pgcrypto");
@@ -203,12 +211,24 @@ namespace online_recharged_mobile.Models
 
                 entity.Property(e => e.Id).HasColumnName("id");
 
+                entity.Property(e => e.Address)
+                    .HasMaxLength(200)
+                    .HasColumnName("address");
+
                 entity.Property(e => e.CreateAt)
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("create_at")
                     .HasDefaultValueSql("CURRENT_TIMESTAMP");
 
+                entity.Property(e => e.Dob)
+                    .HasColumnType("timestamp without time zone")
+                    .HasColumnName("dob");
+
                 entity.Property(e => e.Email).HasMaxLength(50);
+
+                entity.Property(e => e.Fullname)
+                    .HasMaxLength(50)
+                    .HasColumnName("fullname");
 
                 entity.Property(e => e.IsActive)
                     .HasColumnName("is_active")
@@ -229,6 +249,8 @@ namespace online_recharged_mobile.Models
                 entity.Property(e => e.Phone)
                     .HasMaxLength(15)
                     .HasColumnName("phone");
+
+                entity.Property(e => e.Picture).HasColumnName("picture");
 
                 entity.Property(e => e.Username)
                     .HasMaxLength(50)

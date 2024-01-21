@@ -1,11 +1,54 @@
 {
   "Version": 1,
-  "Hash": "efh3lP4YtwgVsorV5LTCerw+PAHWrKpWD2/kHB/q3l0=",
+  "Hash": "mr1RuahlkKNc79+yn3mhp16EyWCyJVWqTP7D06UsP7o=",
   "Source": "online-recharged-mobile",
   "BasePath": "_content/online-recharged-mobile",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "online-recharged-mobile\\wwwroot",
+      "Source": "online-recharged-mobile",
+      "ContentRoot": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\",
+      "BasePath": "_content/online-recharged-mobile",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\images\\283261396_4854578731315522_7108252699229220062_n.jpg",
+      "SourceId": "online-recharged-mobile",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\",
+      "BasePath": "_content/online-recharged-mobile",
+      "RelativePath": "images/283261396_4854578731315522_7108252699229220062_n.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\283261396_4854578731315522_7108252699229220062_n.jpg"
+    },
+    {
+      "Identity": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\images\\test.jpg",
+      "SourceId": "online-recharged-mobile",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\github\\Online-Mobile-Recharged\\online-recharged-mobile\\wwwroot\\",
+      "BasePath": "_content/online-recharged-mobile",
+      "RelativePath": "images/test.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\test.jpg"
+    }
+  ]
 }
