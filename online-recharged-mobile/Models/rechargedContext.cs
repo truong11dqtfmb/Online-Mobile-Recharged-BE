@@ -217,7 +217,9 @@ namespace online_recharged_mobile.Models
                     .HasColumnType("timestamp without time zone")
                     .HasColumnName("dob");
 
-                entity.Property(e => e.Email).HasMaxLength(50);
+                entity.Property(e => e.Email)
+                .HasMaxLength(50)
+                .HasColumnName("email");
 
                 entity.Property(e => e.Fullname)
                     .HasMaxLength(50)
