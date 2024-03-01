@@ -24,6 +24,7 @@ builder.Services.AddDbContext<rechargedContext>(options =>
 {
     var connectionString = builder.Configuration.GetConnectionString("conn");
     options.UseNpgsql(connectionString);
+    AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 });
 builder.Services.AddSwaggerGen(options =>
 {

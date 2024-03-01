@@ -36,6 +36,7 @@ namespace online_recharged_mobile.Controllers
                     .Where(s => s.IsActive == true)
                     .Select(s => new SubcriptionDTO
                     {
+                        Id = s.Id,
                         Value = s.Value,
                         ProviderName = s.Provider.Name
                     })
@@ -57,6 +58,7 @@ namespace online_recharged_mobile.Controllers
                     .Where(s => s.IsActive == true && s.Id == id)
                     .Select(s => new SubcriptionDTO
                     {
+                        Id = s.Id,
                         Value = s.Value,
                         ProviderName = s.Provider.Name
                     })

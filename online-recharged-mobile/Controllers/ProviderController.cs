@@ -32,7 +32,7 @@ namespace online_recharged_mobile.Controllers
             {
                 return Ok(_responseMessage.ok("get data successfully", await _context.ServiceProviders
                     .Where(sp => sp.IsActive == true)
-                    .Select(sp => new ServiceProviderDTO(sp))
+                    .Select(sp => new GetProviderDTO(sp))
                     .ToListAsync()));
             }
             catch (Exception ex)
@@ -49,7 +49,7 @@ namespace online_recharged_mobile.Controllers
             {
                 return Ok(_responseMessage.ok("get data successfully", await _context.ServiceProviders
                     .Where(sp => sp.IsActive == true && sp.Id == id)
-                    .Select(sp => new ServiceProviderDTO(sp))
+                    .Select(sp => new GetProviderDTO(sp))
                     .SingleOrDefaultAsync()
                     ?? throw new Exception("data not found")));
             }
@@ -61,7 +61,7 @@ namespace online_recharged_mobile.Controllers
 
 
         [HttpPost("addprovider")]
-        public async Task<IActionResult> addNewProviders(ServiceProviderDTO request)
+        public async Task<IActionResult> addNewProviders([FromForm] ServiceProviderDTO request)
         {
             try
             {
@@ -72,6 +72,17 @@ namespace online_recharged_mobile.Controllers
                     UserDiscount = request.UserDiscount,
                     CreateBy = _userService.getUserName()
                 };
+                if (request.Image.Length > 0)
+                {
+                    string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    string fileName = $"{timestamp}_{request.Image.FileName}";
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "providers", fileName);
+                    using (var stream = System.IO.File.Create(path))
+                    {
+                        await request.Image.CopyToAsync(stream);
+                    }
+                    new_provider.Picture = string.Format("https://localhost:7067/images/providers/{0}", fileName);
+                }
                 await _context.ServiceProviders.AddAsync(new_provider);
                 await _context.SaveChangesAsync();
                 return Ok(_responseMessage.ok("add data successfully", new_provider));
@@ -83,7 +94,7 @@ namespace online_recharged_mobile.Controllers
         }
         
         [HttpPut("editprovider/{id}")]
-        public async Task<IActionResult> editProviders(ServiceProviderDTO request, int id)
+        public async Task<IActionResult> editProviders([FromForm] ServiceProviderDTO request, int id)
         {
             try
             {
@@ -97,7 +108,18 @@ namespace online_recharged_mobile.Controllers
                 provider.UserDiscount = request.UserDiscount;
                 provider.ModifyAt = DateTime.Now;
                 provider.ModifyBy = _userService.getUserName();
-         
+                if (request.Image.Length > 0)
+                {
+                    string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    string fileName = $"{timestamp}_{request.Image.FileName}";
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "providers", fileName);
+                    using (var stream = System.IO.File.Create(path))
+                    {
+                        await request.Image.CopyToAsync(stream);
+                    }
+                    provider.Picture = string.Format("https://localhost:7067/images/providers/{0}", fileName);
+                }
+
                 await _context.SaveChangesAsync();
                 return Ok(_responseMessage.ok("update data successfully", provider));
             }

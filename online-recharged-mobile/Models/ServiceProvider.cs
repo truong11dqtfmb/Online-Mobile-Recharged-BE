@@ -19,6 +19,7 @@ namespace online_recharged_mobile.Models
         public DateTime? ModifyAt { get; set; }
         public string? ModifyBy { get; set; }
         public bool? IsActive { get; set; }
+        public string? Picture { get; set; }
 
         public virtual ICollection<Subcription> Subcriptions { get; set; }
     }

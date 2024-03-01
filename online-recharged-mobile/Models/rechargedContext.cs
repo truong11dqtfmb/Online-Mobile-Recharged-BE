@@ -120,6 +120,8 @@ namespace online_recharged_mobile.Models
                     .HasMaxLength(50)
                     .HasColumnName("name");
 
+                entity.Property(e => e.Picture).HasColumnName("picture");
+
                 entity.Property(e => e.UserDiscount).HasColumnName("user_discount");
             });
 

@@ -7,6 +7,7 @@ namespace online_recharged_mobile.DTOs
         public string? Name { get; set; }
         public double? UserDiscount { get; set; }
         public double? AdminDiscount { get; set; }
+        public IFormFile? Image { get; set; }
 
         public ServiceProviderDTO() { }
 

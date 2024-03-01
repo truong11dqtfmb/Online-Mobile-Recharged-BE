@@ -12,7 +12,7 @@ namespace online_recharged_mobile.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "User")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly rechargedContext _context;
@@ -38,12 +38,14 @@ namespace online_recharged_mobile.Controllers
                     .SingleOrDefaultAsync();
                 if (request.Image.Length > 0)
                 {
-                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", request.Image.FileName);
+                    string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    string fileName = $"{timestamp}_{request.Image.FileName}";
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", fileName);
                     using (var stream = System.IO.File.Create(path))
                     {
                         await request.Image.CopyToAsync(stream);
                     }
-                    user.Picture = string.Format("/images/{0}", request.Image.FileName);
+                    user.Picture = string.Format("https://localhost:7067/images/{0}", fileName);
                 }
                 await _context.SaveChangesAsync();
                 return Ok(_responseMessage.ok("add picture successfully"));
@@ -55,7 +57,7 @@ namespace online_recharged_mobile.Controllers
         }
 
         [HttpPut("edituser")]
-        public async Task<IActionResult> editUser(EdituserDTO request)
+        public async Task<IActionResult> editUser([FromForm] EdituserDTO request)
         {
             try
             {
@@ -68,6 +70,17 @@ namespace online_recharged_mobile.Controllers
                 user.Address = request.Address;
                 user.Dob = request.Dob;
                 user.ModifyAt = DateTime.Now;
+                if (request.Image.Length > 0)
+                {
+                    string timestamp = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    string fileName = $"{timestamp}_{request.Image.FileName}";
+                    var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "users", fileName);
+                    using (var stream = System.IO.File.Create(path))
+                    {
+                        await request.Image.CopyToAsync(stream);
+                    }
+                    user.Picture = string.Format("https://localhost:7067/images/users/{0}", fileName);
+                }
 
                 await _context.SaveChangesAsync();
                 return Ok(_responseMessage.ok("update data successfully", user));
@@ -79,16 +92,16 @@ namespace online_recharged_mobile.Controllers
         }
 
         [HttpPut("changepassword")]
-        public async Task<IActionResult> ChangePassword(ChangePasswordDTO changepass)
+        public async Task<IActionResult> ChangePassword(ChangePasswordDTO request)
         {
             try
             {
                 var thisuser = await _context.Users
                     .Where(x => x.Username == _userService.getUserName())
                     .SingleOrDefaultAsync();
-                if (_common.Hash(changepass.CurrentPassword) == thisuser.Password)
+                if (_common.Hash(request.CurrentPassword) == thisuser.Password)
                 {
-                    thisuser.Password = _common.Hash(changepass.NewPassword);
+                    thisuser.Password = _common.Hash(request.NewPassword);
                     await _context.SaveChangesAsync();
                     return Ok(_responseMessage.ok("Change password sucessfully"));
                 }
