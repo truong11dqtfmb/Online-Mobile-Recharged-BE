@@ -60,11 +60,11 @@ namespace online_recharged_mobile.Controllers
             {
                 var count = await (from t in _context.Transactions
                                     join s in _context.Subcriptions on t.SubcriptionId equals s.ProviderId
-                                    group new { t, s } by t.UserId into g
+                                    group s by new { t.UserId } into g
                                     select new
                                     {
                                         UserId = g.Key,
-                                        Total = g.Sum(x => x.s.Value)
+                                        Total = g.Sum(x => x.Value)
                                     })
               .OrderByDescending(x => x.Total)
               .Take(10)
@@ -84,12 +84,11 @@ namespace online_recharged_mobile.Controllers
             {
                 var count = await (from sp in _context.ServiceProviders
                                    join s in _context.Subcriptions on sp.Id equals s.ProviderId
-                                   group new { sp, s } by new { s.ProviderId, sp.Name, sp.Id, s.Value } into g
+                                   group s by new { sp.Name, sp.Id} into g
                                    select new
                                    {
-                                       Name = g.Key.Name,
                                        Id = g.Key.Id,
-                                       Value = g.Key.Value,
+                                       Name = g.Key.Name,
                                        Count = g.Count()
                                    })
               .ToListAsync();
