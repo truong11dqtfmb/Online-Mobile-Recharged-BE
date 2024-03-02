@@ -71,6 +71,29 @@ namespace online_recharged_mobile.Controllers
             }
         }
 
+        [HttpGet("getsubcriptionbyproviderid/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> getSubcriptionByProvider(int id)
+        {
+            try
+            {
+                return Ok(_responseMessage.ok("get data successfully", (await _context.Subcriptions
+                    .Where(s => s.IsActive == true && s.ProviderId == id)
+                    .Select(s => new SubcriptionDTO
+                    {
+                        Id = s.Id,
+                        Value = s.Value,
+                        ProviderName = s.Provider.Name
+                    })
+                     .ToListAsync()
+                    )));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(_responseMessage.error(ex.Message));
+            }
+        }
+
         [HttpPost("addnewsubcription")]
         public async Task<IActionResult> addNewSubcription(AddSubcriptionDTO request)
         {

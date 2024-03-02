@@ -63,7 +63,7 @@ namespace online_recharged_mobile.Controllers
                                     group s by new { t.UserId } into g
                                     select new
                                     {
-                                        UserId = g.Key,
+                                        UserId = g.Key.UserId,
                                         Total = g.Sum(x => x.Value)
                                     })
               .OrderByDescending(x => x.Total)
