@@ -26,6 +26,7 @@ namespace online_recharged_mobile.Controllers
 
 
         [HttpGet("getallprovider")]
+        [AllowAnonymous]
         public async Task<IActionResult> getAllProviders()
         {
             try
@@ -43,6 +44,7 @@ namespace online_recharged_mobile.Controllers
 
 
         [HttpGet("getproviderbyid/{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> getProviderByID(int id)
         {
             try

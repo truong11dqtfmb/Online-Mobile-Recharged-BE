@@ -38,6 +38,7 @@ namespace online_recharged_mobile.Controllers
                     {
                         Id = s.Id,
                         Value = s.Value,
+                        ProviderId = s.ProviderId,
                         ProviderName = s.Provider.Name
                     })
                     .ToListAsync())));
@@ -60,6 +61,7 @@ namespace online_recharged_mobile.Controllers
                     {
                         Id = s.Id,
                         Value = s.Value,
+                        ProviderId = s.ProviderId,
                         ProviderName = s.Provider.Name
                     })
                     .SingleOrDefaultAsync()
@@ -83,6 +85,7 @@ namespace online_recharged_mobile.Controllers
                     {
                         Id = s.Id,
                         Value = s.Value,
+                        ProviderId = s.ProviderId,
                         ProviderName = s.Provider.Name
                     })
                      .ToListAsync()
