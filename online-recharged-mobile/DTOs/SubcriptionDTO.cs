@@ -6,6 +6,7 @@ namespace online_recharged_mobile.DTOs
     {
         public long Id { get; set; }
         public double? Value { get; set; }
+        public long? ProviderId { get; set; }
         public string? ProviderName { get; set; }
     }
 }
