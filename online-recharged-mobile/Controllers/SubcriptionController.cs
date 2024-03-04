@@ -42,6 +42,7 @@ namespace online_recharged_mobile.Controllers
                         ProviderName = s.Provider.Name,
                         AdminDiscount = s.Provider.AdminDiscount,
                         UserDiscount = s.Provider.UserDiscount,
+                        Picture = s.Provider.Picture
                     })
                     .ToListAsync())));
             }
@@ -67,6 +68,7 @@ namespace online_recharged_mobile.Controllers
                         ProviderName = s.Provider.Name,
                         AdminDiscount = s.Provider.AdminDiscount,
                         UserDiscount = s.Provider.UserDiscount,
+                        Picture = s.Provider.Picture
                     })
                     .SingleOrDefaultAsync()
                     ?? throw new Exception("data not found"))));
@@ -93,6 +95,7 @@ namespace online_recharged_mobile.Controllers
                         ProviderName = s.Provider.Name,
                         AdminDiscount = s.Provider.AdminDiscount,
                         UserDiscount = s.Provider.UserDiscount,
+                        Picture = s.Provider.Picture
                     })
                      .ToListAsync()
                     )));
