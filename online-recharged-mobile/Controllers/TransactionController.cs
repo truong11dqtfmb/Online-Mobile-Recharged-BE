@@ -29,7 +29,7 @@ namespace online_recharged_mobile.Controllers
 
         [HttpPost("addsubcription")]
         [Authorize(Roles ="User")]
-        public async Task<IActionResult> addSubcription(int subcriptionid)
+        public async Task<IActionResult> addSubcription(AddTransactionDTO request)
         {
             try
             {
@@ -39,17 +39,17 @@ namespace online_recharged_mobile.Controllers
                     .SingleOrDefaultAsync();
                 var transaction = new Transaction
                 {
-                    SubcriptionId = subcriptionid,
+                    SubcriptionId = request.SubcriptionId,
                     UserId = userID
                 };
                 await _context.Transactions.AddAsync(transaction);
                 await _context.SaveChangesAsync();
                 var subcriptionValue = await _context.Subcriptions
-                    .Where(s => s.Id == subcriptionid && s.IsActive == true)
+                    .Where(s => s.Id == request.SubcriptionId && s.IsActive == true)
                     .Select(s => s.Value)
                     .SingleOrDefaultAsync();
                 var provider = await _context.Subcriptions
-                    .Where(s => s.Id == subcriptionid && s.IsActive == true)
+                    .Where(s => s.Id == request.SubcriptionId && s.IsActive == true)
                     .Select(s => s.Provider)
                     .Select(p => p.Name) 
                     .SingleOrDefaultAsync();
