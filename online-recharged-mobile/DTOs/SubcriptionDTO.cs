@@ -10,5 +10,6 @@ namespace online_recharged_mobile.DTOs
         public string? ProviderName { get; set; }
         public double? UserDiscount { get; set; }
         public double? AdminDiscount { get; set; }
+        public string? Picture { get; set; }
     }
 }

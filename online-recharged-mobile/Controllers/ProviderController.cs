@@ -136,6 +136,10 @@ namespace online_recharged_mobile.Controllers
         {
             try
             {
+                if (_context.Subcriptions.Any(x => x.ProviderId == id))
+                {
+                    return BadRequest(_responseMessage.error("You need to delete subcription first"));
+                }
                 var provider = await _context.ServiceProviders
                     .Where(sp => sp.Id == id && sp.IsActive == true)
                     .SingleOrDefaultAsync()
