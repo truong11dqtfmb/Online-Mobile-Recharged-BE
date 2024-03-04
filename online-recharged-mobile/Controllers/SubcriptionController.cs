@@ -39,7 +39,9 @@ namespace online_recharged_mobile.Controllers
                         Id = s.Id,
                         Value = s.Value,
                         ProviderId = s.ProviderId,
-                        ProviderName = s.Provider.Name
+                        ProviderName = s.Provider.Name,
+                        AdminDiscount = s.Provider.AdminDiscount,
+                        UserDiscount = s.Provider.UserDiscount,
                     })
                     .ToListAsync())));
             }
@@ -62,7 +64,9 @@ namespace online_recharged_mobile.Controllers
                         Id = s.Id,
                         Value = s.Value,
                         ProviderId = s.ProviderId,
-                        ProviderName = s.Provider.Name
+                        ProviderName = s.Provider.Name,
+                        AdminDiscount = s.Provider.AdminDiscount,
+                        UserDiscount = s.Provider.UserDiscount,
                     })
                     .SingleOrDefaultAsync()
                     ?? throw new Exception("data not found"))));
@@ -86,7 +90,9 @@ namespace online_recharged_mobile.Controllers
                         Id = s.Id,
                         Value = s.Value,
                         ProviderId = s.ProviderId,
-                        ProviderName = s.Provider.Name
+                        ProviderName = s.Provider.Name,
+                        AdminDiscount = s.Provider.AdminDiscount,
+                        UserDiscount = s.Provider.UserDiscount,
                     })
                      .ToListAsync()
                     )));
